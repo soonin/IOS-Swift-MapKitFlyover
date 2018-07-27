@@ -7,19 +7,40 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
 
+    let distance: CLLocationDistance = 800
+    let pitch: CGFloat = 400
+    let heading = 45.0
+    var camera: MKMapCamera?
+    
+    @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        mapView.mapType = .satelliteFlyover
+        
+        // coordinates of Capitol
+        let coordinate = CLLocationCoordinate2DMake(49.273376, -123.103834)  // Vancouver, Science World at TELUS World of Science
+ 
+        camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: distance, pitch: pitch, heading: heading)
+        mapView.camera = camera!
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func rotateLeft(_ sender: Any) {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.camera!.heading -= 10
+            self.mapView.camera = self.camera!
+        })
     }
-
-
+    
+    @IBAction func rotateRight(_ sender: Any) {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.camera!.heading += 10
+            self.mapView.camera = self.camera!
+        })
+    }
+    
 }
 
