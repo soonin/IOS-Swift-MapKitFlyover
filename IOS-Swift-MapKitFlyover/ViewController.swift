@@ -23,7 +23,8 @@ class ViewController: UIViewController {
         
         // coordinates of Capitol
         let coordinate = CLLocationCoordinate2DMake(49.273376, -123.103834)  // Vancouver, Science World at TELUS World of Science
- 
+        //let coordinate = CLLocationCoordinate2DMake(49.221031, -122.812697)  // Vancouver, The Port Mann Bridge
+        
         camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: distance, pitch: pitch, heading: heading)
         mapView.camera = camera!
     }
